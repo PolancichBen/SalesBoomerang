@@ -4,15 +4,9 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 
 import { useAppDispatch } from './store';
-import { siteInformationSelector } from './store/site';
+import { colorsSelectors } from './store/colors';
 
 import LandingPage from './pages/LandingPage';
-
-import GlobalHeader from './components/organisms/GlobalHeader';
-
-import HelloModal from './components/molecules/modals/HelloModal';
-
-import { useModal } from './hooks/UseModal';
 
 const Container = styled.div`
   display: flex;
@@ -25,20 +19,14 @@ const Container = styled.div`
 `;
 
 const App: FC = () => {
-  const [triggerModal, Modal] = useModal();
   const dispatch = useAppDispatch();
-
-  const siteInformation = useSelector(siteInformationSelector);
+  const colors = useSelector(colorsSelectors);
 
   return (
     <Container>
-      <GlobalHeader signedIn={false} />
-      <Modal contents={HelloModal} requireResponse />
       <Routes>
-        {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
       </Routes>
-      {/* <GlobalFooter /> */}
     </Container>
   );
 };

@@ -1,13 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
-import { accountReducer } from './account';
-import { siteReducer } from './site';
+import { colorReducer } from './colors';
 
 export const store = configureStore({
   reducer: {
-    account: accountReducer,
-    site: siteReducer,
+    colorReducer: colorReducer,
   },
 });
 

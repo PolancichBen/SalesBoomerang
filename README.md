@@ -25,7 +25,7 @@ In the project directory, you can run:
 ### `npm run Backend`
 
 Runs the Express server to fetch JSON Colors from.
-This should be down first.
+This should be done first.
 
 ### `npm start`
 

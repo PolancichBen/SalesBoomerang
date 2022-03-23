@@ -1,10 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 
 import { useAppDispatch } from './store';
-import { colorsSelectors } from './store/colors';
+import { fetchColors } from './store/colors';
 
 import LandingPage from './pages/LandingPage';
 
@@ -20,7 +19,12 @@ const Container = styled.div`
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
-  const colors = useSelector(colorsSelectors);
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(fetchColors());
+    })();
+  }, [dispatch]);
 
   return (
     <Container>

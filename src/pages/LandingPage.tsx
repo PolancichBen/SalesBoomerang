@@ -1,5 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+
+import { colorsSelectors } from '../store/colors';
 
 const Container = styled.div`
   min-height: 100%;
@@ -9,6 +12,7 @@ const Container = styled.div`
 `;
 
 const LandingPage: FC = () => {
+  const colors = useSelector(colorsSelectors);
   return <Container>Hello World</Container>;
 };
 

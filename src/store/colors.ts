@@ -1,26 +1,55 @@
 import { RootState } from './index';
-import { createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSlice,
+  PayloadAction,
+  Slice,
+} from '@reduxjs/toolkit';
+import Axios from 'axios';
 
-export interface colorState {
+export interface ColorState {
   colors: Array<string>;
 }
 
-const generateInitialState = (): colorState => ({
+const generateInitialState = (): ColorState => ({
   colors: [],
 });
 
 // ASYNC THUNKS
+export const fetchColors = createAsyncThunk(
+  'colors',
+  async (): Promise<any> => {
+    let response;
+    try {
+      response = await Axios.get('http://localhost:3002/data', {
+        headers: {
+          Accept: '*/*',
+          'Access-Control-Allow-Origin': 'true',
+        },
+      });
+      return response.data;
+    } catch (e) {
+      console.error('Error fetching Colors:', e);
+      return [];
+    }
+  }
+);
 
 // REDUCERS
 const colorSlice: Slice = createSlice({
   name: 'colors',
   initialState: generateInitialState(),
   reducers: {
-    setColors: (state: colorState, action: PayloadAction<Array<string>>) => {
+    setColors: (state: ColorState, action: PayloadAction<Array<string>>) => {
       state.colors = action.payload;
     },
   },
-  extraReducers: (builder: any) => {},
+  extraReducers: (builder: any) => {
+    builder.addCase(fetchColors.fulfilled, (state: ColorState, action: any) => {
+      console.log('Action', action);
+      state.colors = action.payload.colors;
+    });
+  },
 });
 
 // SELECTORS

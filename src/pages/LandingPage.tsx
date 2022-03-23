@@ -19,13 +19,16 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Header = styled.h1``;
+const Header = styled.h1`
+  text-align: center;
+`;
 
 const Body = styled.div`
   width: 100%;
   margin-top: 2rem;
   justify-content: center;
   display: flex;
+  flex-flow: wrap;
 `;
 
 const ColorBox = styled.button<{ color: string }>`

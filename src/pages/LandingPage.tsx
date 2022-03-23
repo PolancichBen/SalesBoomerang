@@ -52,7 +52,7 @@ const LandingPage: FC = () => {
       <Loader loading={!colors.length}>
         <Header>
           {selectedColor.length
-            ? `Your Selected Color is ${selectedColor}`
+            ? `My Favorite Color is ${selectedColor}`
             : 'Please Select a Color to Begin'}
         </Header>
         <Body>
@@ -65,6 +65,9 @@ const LandingPage: FC = () => {
             </ColorBox>
           ))}
         </Body>
+        <ColorBox color="White" onClick={() => dispatch(setSelectedColor(''))}>
+          Reset
+        </ColorBox>
       </Loader>
     </Container>
   );

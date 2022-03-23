@@ -9,10 +9,12 @@ import Axios from 'axios';
 
 export interface ColorState {
   colors: Array<string>;
+  selectedColor: string;
 }
 
 const generateInitialState = (): ColorState => ({
   colors: [],
+  selectedColor: '',
 });
 
 // ASYNC THUNKS
@@ -43,18 +45,23 @@ const colorSlice: Slice = createSlice({
     setColors: (state: ColorState, action: PayloadAction<Array<string>>) => {
       state.colors = action.payload;
     },
+    setSelectedColor: (state: ColorState, action: PayloadAction<string>) => {
+      state.selectedColor = action.payload;
+    },
   },
   extraReducers: (builder: any) => {
     builder.addCase(fetchColors.fulfilled, (state: ColorState, action: any) => {
-      console.log('Action', action);
       state.colors = action.payload.colors;
     });
   },
 });
 
 // SELECTORS
-export const colorsSelectors = (state: RootState) => state.colorReducer.colors;
+export const colorsSelectors = (state: RootState): Array<string> =>
+  state.colorReducer.colors;
+export const selectedColorSelector = (state: RootState): string =>
+  state.colorReducer.selectedColor;
 
 // EXPORTS
 export const colorReducer = colorSlice.reducer;
-export const { setColors } = colorSlice.actions;
+export const { setColors, setSelectedColor } = colorSlice.actions;

@@ -12,6 +12,7 @@ const spin = keyframes`
 `;
 
 const LoaderElement = styled.div`
+  margin-top: 2rem;
   border-radius: 50%;
   border-top: 2px solid gray;
   width: 60px;
